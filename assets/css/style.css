@@ -690,8 +690,60 @@ button {
   max-width: 60ch;
 }
 
+.timeline__bullets {
+  list-style: disc;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.timeline__bullets li {
+  font-size: 0.9375rem;
+  color: var(--clr-text-muted);
+  line-height: 1.75;
+  max-width: 70ch;
+}
+
 /* --------------------------------------------------------------------------
-   11. Contact Section
+   11. Extracurriculars Section
+   -------------------------------------------------------------------------- */
+.extra__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-xl);
+}
+
+.extra__card {
+  background: var(--clr-surface-2);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  padding: var(--space-lg);
+}
+
+.extra__card-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--clr-white);
+  margin-bottom: var(--space-md);
+}
+
+.extra__list {
+  list-style: disc;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.extra__list li {
+  font-size: 0.9375rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   12. Contact Section
    -------------------------------------------------------------------------- */
 .contact {
   text-align: center;
@@ -719,7 +771,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   12. Footer
+   13. Footer
    -------------------------------------------------------------------------- */
 .footer {
   background: var(--clr-surface-2);
@@ -735,7 +787,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   13. Scroll-reveal Utility
+   14. Scroll-reveal Utility
    -------------------------------------------------------------------------- */
 .reveal {
   opacity: 0;
@@ -749,7 +801,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   14. Responsive — Tablet (≤ 768px)
+   15. Responsive — Tablet (≤ 768px)
    -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
   .nav__toggle {
@@ -795,7 +847,7 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   15. Responsive — Mobile (≤ 480px)
+   16. Responsive — Mobile (≤ 480px)
    -------------------------------------------------------------------------- */
 @media (max-width: 480px) {
   .container {
