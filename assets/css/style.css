@@ -608,6 +608,16 @@ button {
   transform: scale(1.05);
 }
 
+/* X-FLEX preview — zoom out so the full model fits within the card */
+[data-project-id="xflex"] .project-card__image img {
+  object-fit: contain;
+  transform: scale(0.9);
+}
+
+[data-project-id="xflex"]:hover .project-card__image img {
+  transform: scale(0.95);
+}
+
 /* Video variant of project card image */
 .project-card__image--video {
   background: #000;

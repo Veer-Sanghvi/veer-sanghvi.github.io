@@ -205,12 +205,12 @@
       media: [
         {
           type: 'image',
-          src: 'assets/Image.png',
+          src: 'assets/X-flex/Image.png',
           caption: 'X-FLEX scissor lift — 3D model'
         },
         {
           type: 'image',
-          src: 'assets/Design .png',
+          src: 'assets/X-flex/Design .png',
           caption: 'X-FLEX scissor lift — design drawing'
         }
       ]
@@ -226,27 +226,27 @@
       media: [
         {
           type: 'video',
-          src: 'assets/Finished.mov',
+          src: 'assets/wobbler/Finished.mov',
           caption: 'High-Speed Wobbler Engine — finished running at 2,340 RPM'
         },
         {
           type: 'video',
-          src: 'assets/Untitled.mov',
+          src: 'assets/wobbler/Untitled.mov',
           caption: 'Wobbler engine — additional build and test footage'
         },
         {
           type: 'image',
-          src: 'assets/IMG_5658.JPG',
+          src: 'assets/wobbler/IMG_5658.JPG',
           caption: 'Wobbler engine — machined components and assembly'
         },
         {
           type: 'image',
-          src: 'assets/IMG_5660.JPG',
+          src: 'assets/wobbler/IMG_5660.JPG',
           caption: 'Wobbler engine — precision-toleranced parts'
         },
         {
           type: 'image',
-          src: 'assets/IMG_5662.jpg',
+          src: 'assets/wobbler/IMG_5662.jpg',
           caption: 'Wobbler engine — sand cast and tumbled mechanism parts'
         }
       ]
