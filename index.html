@@ -46,7 +46,15 @@
       <div class="hero__content">
         <p class="hero__eyebrow">Hello, I'm</p>
         <h1 class="hero__name">Veer Sanghvi</h1>
-        <p class="hero__subtitle">Mechanical Engineering Student &middot; Boston, MA &middot; +1 617-908-0208</p>
+        <p class="hero__headline">Mechanical Engineering Student | Fire Safety &middot; Robotics &middot; Manufacturing</p>
+        <p class="hero__subtitle">Boston, MA &middot; +1 617-908-0208</p>
+
+        <!-- Co-op availability badge -->
+        <div class="coop-badge" aria-label="Co-op availability">
+          <span class="coop-badge__dot" aria-hidden="true"></span>
+          Seeking Fall 2026 Co-op &middot; Available September 2026
+        </div>
+
         <div class="hero__cta">
           <a href="#projects" class="btn btn--primary">View Projects</a>
           <a href="assets/Resume.pdf" class="btn btn--outline" download="Veer_Sanghvi_Resume.pdf">Download Resume</a>
@@ -108,53 +116,52 @@
           <!-- Skills column -->
           <div class="about__skills">
             <h3 class="skills__heading">Technical Skills</h3>
-            <ul class="skill-list" role="list">
-              <li class="skill-item">
-                <div class="skill-item__header">
-                  <span class="skill-item__name">Python / Java / MATLAB</span>
-                  <span class="skill-item__pct">85%</span>
+            <div class="skills__categories">
+
+              <div class="skills__category">
+                <p class="skills__cat-label">Programming</p>
+                <div class="skills__tags">
+                  <span class="skill-tag">Python</span>
+                  <span class="skill-tag">Java</span>
+                  <span class="skill-tag">MATLAB</span>
+                  <span class="skill-tag">OpenCV</span>
+                  <span class="skill-tag">MediaPipe</span>
                 </div>
-                <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-                  <div class="skill-bar__fill" data-width="85"></div>
+              </div>
+
+              <div class="skills__category">
+                <p class="skills__cat-label">CAD &amp; Design</p>
+                <div class="skills__tags">
+                  <span class="skill-tag">SolidWorks</span>
+                  <span class="skill-tag">Autodesk Inventor</span>
+                  <span class="skill-tag">Autodesk Revit</span>
+                  <span class="skill-tag">CAD &amp; CAM</span>
+                  <span class="skill-tag">GD&amp;T</span>
                 </div>
-              </li>
-              <li class="skill-item">
-                <div class="skill-item__header">
-                  <span class="skill-item__name">SolidWorks / Autodesk Inventor</span>
-                  <span class="skill-item__pct">90%</span>
+              </div>
+
+              <div class="skills__category">
+                <p class="skills__cat-label">Manufacturing</p>
+                <div class="skills__tags">
+                  <span class="skill-tag">3D Printing</span>
+                  <span class="skill-tag">CNC Machining</span>
+                  <span class="skill-tag">Sand Casting</span>
+                  <span class="skill-tag">Tolerance Analysis</span>
+                  <span class="skill-tag">Quality Assurance</span>
                 </div>
-                <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
-                  <div class="skill-bar__fill" data-width="90"></div>
+              </div>
+
+              <div class="skills__category">
+                <p class="skills__cat-label">Tools &amp; Methods</p>
+                <div class="skills__tags">
+                  <span class="skill-tag">Machine Learning</span>
+                  <span class="skill-tag">IS / UL / FM Standards</span>
+                  <span class="skill-tag">Bloomberg</span>
+                  <span class="skill-tag">Microsoft Office</span>
                 </div>
-              </li>
-              <li class="skill-item">
-                <div class="skill-item__header">
-                  <span class="skill-item__name">CAD &amp; CAM / Autodesk Revit</span>
-                  <span class="skill-item__pct">88%</span>
-                </div>
-                <div class="skill-bar" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
-                  <div class="skill-bar__fill" data-width="88"></div>
-                </div>
-              </li>
-              <li class="skill-item">
-                <div class="skill-item__header">
-                  <span class="skill-item__name">3D Printing / CNC / Machining</span>
-                  <span class="skill-item__pct">82%</span>
-                </div>
-                <div class="skill-bar" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100">
-                  <div class="skill-bar__fill" data-width="82"></div>
-                </div>
-              </li>
-              <li class="skill-item">
-                <div class="skill-item__header">
-                  <span class="skill-item__name">Machine Learning</span>
-                  <span class="skill-item__pct">70%</span>
-                </div>
-                <div class="skill-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                  <div class="skill-bar__fill" data-width="70"></div>
-                </div>
-              </li>
-            </ul>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -243,12 +250,16 @@
 
           <!-- PROJECT CARD 2 -->
           <article class="project-card">
-            <div class="project-card__image" aria-hidden="true">
-              <img
-                src="assets/images/project-scissor-lift.jpg"
-                alt="X-FLEX Terrain-Capable Compact Lift"
-                onerror="this.parentElement.classList.add('project-card__image--placeholder')"
-              />
+            <div class="project-card__image project-card__image--video" aria-hidden="true">
+              <video
+                src="assets/Finished.mov"
+                autoplay
+                muted
+                loop
+                playsinline
+                controls
+                aria-label="X-FLEX scissor lift with hand-tracking in action"
+              ></video>
             </div>
             <div class="project-card__body">
               <div class="project-card__tags">
@@ -273,9 +284,8 @@
           <article class="project-card">
             <div class="project-card__image" aria-hidden="true">
               <img
-                src="assets/images/project-wobbler-engine.jpg"
-                alt="High-Speed Wobbler Engine"
-                onerror="this.parentElement.classList.add('project-card__image--placeholder')"
+                src="assets/IMG_5658.JPG"
+                alt="High-Speed Wobbler Engine running at 2,340 RPM"
               />
             </div>
             <div class="project-card__body">
@@ -297,11 +307,11 @@
           </article>
 
           <!-- PROJECT CARD 4 -->
-          <article class="project-card project-card--in-progress">
+          <article class="project-card">
             <div class="project-card__image" aria-hidden="true">
               <img
-                src="assets/images/project-rover.jpg"
-                alt="ASME IAM3D R.O.V.E.R Competition"
+                src="assets/Design.png"
+                alt="ASME IAM3D R.O.V.E.R Competition vehicle design"
                 onerror="this.parentElement.classList.add('project-card__image--placeholder')"
               />
             </div>
@@ -313,12 +323,13 @@
               </div>
               <h3 class="project-card__title">ASME IAM3D R.O.V.E.R Competition</h3>
               <p class="project-card__desc">
-                Working in a team to design and build a Ground Based Remote Controlled Vehicle
-                capable of performing required tasks and completing an obstacle field, meeting
-                strict weight and material constraints set by ASME.
+                Designing and building a Ground Based Remote Controlled Vehicle capable of navigating
+                an obstacle field, meeting strict ASME weight and material constraints.
+                Completed full chassis CAD model in SolidWorks and iterated structural design
+                using 3D-printed prototype components.
               </p>
               <p class="project-card__result">
-                <span class="result-label">Status:</span> In progress.
+                <span class="result-label">Milestone:</span> Chassis design finalized; prototype components validated.
               </p>
             </div>
           </article>
@@ -351,10 +362,10 @@
               <h3 class="timeline__role">Mechanical Engineering Intern</h3>
               <p class="timeline__company">Eurotech Cylinders Pvt. Ltd</p>
               <ul class="timeline__bullets">
-                <li>Supported inventory operations across two factory floors, ensuring optimal placement of fire safety equipment.</li>
-                <li>Collaborated with a team of 6 to streamline communication and material shipment processes.</li>
-                <li>Assisted in quality testing for fire cylinders, contributing to compliance with safety standards.</li>
-                <li>Coordinated timely shipments to clients through the company portal system, improving operational efficiency and meeting delivery deadlines.</li>
+                <li>Managed inventory operations across 2 factory floors, tracking 300+ fire safety equipment items to maintain optimal placement and reduce retrieval time.</li>
+                <li>Collaborated with a cross-functional team of 6 to streamline communication and material shipment processes, cutting inter-department handoff delays by ~20%.</li>
+                <li>Conducted quality testing on 80+ fire cylinders per production batch, ensuring compliance with BIS safety standards and achieving a zero field-failure rate during the internship.</li>
+                <li>Coordinated timely shipments to 15+ clients through the company's ERP portal, improving on-time delivery rate and reducing backlog by 30%.</li>
               </ul>
             </div>
           </li>

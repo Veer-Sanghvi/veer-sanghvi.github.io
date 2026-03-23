@@ -15,6 +15,7 @@
   --clr-text:        #e8e6e0;
   --clr-text-muted:  #8a8478;
   --clr-gold:        #c9943a;
+  --clr-gold-rgb:    201, 148, 58;
   --clr-gold-light:  #e2b05a;
   --clr-gold-dim:    rgba(201, 148, 58, 0.15);
   --clr-white:       #ffffff;
@@ -352,8 +353,47 @@ button {
 .hero__subtitle {
   font-size: clamp(1rem, 2.5vw, 1.25rem);
   color: var(--clr-text-muted);
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-md);
   font-weight: 300;
+}
+
+.hero__headline {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: var(--clr-text);
+  font-weight: 500;
+  margin-bottom: var(--space-xl);
+  letter-spacing: 0.01em;
+}
+
+/* Co-op availability badge */
+.coop-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(201, 148, 58, 0.12);
+  border: 1px solid rgba(201, 148, 58, 0.45);
+  color: var(--clr-gold-light);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border-radius: 99px;
+  margin-bottom: var(--space-xl);
+}
+
+.coop-badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clr-gold);
+  flex-shrink: 0;
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(var(--clr-gold-rgb), 0.6); }
+  50%       { box-shadow: 0 0 0 6px rgba(var(--clr-gold-rgb), 0); }
 }
 
 .hero__cta {
@@ -475,6 +515,50 @@ button {
   transition: width 1s var(--ease);
 }
 
+/* Categorised skill tags (replaces progress bars) */
+.skills__categories {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.skills__category {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.skills__cat-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  margin: 0;
+}
+
+.skills__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.skill-tag {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--clr-text);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  padding: 0.2rem 0.65rem;
+  border-radius: 99px;
+  transition: border-color var(--duration) var(--ease), color var(--duration) var(--ease);
+}
+
+.skill-tag:hover {
+  border-color: var(--clr-gold);
+  color: var(--clr-gold-light);
+}
+
 /* --------------------------------------------------------------------------
    9. Projects Section
    -------------------------------------------------------------------------- */
@@ -521,6 +605,22 @@ button {
 }
 
 .project-card:hover .project-card__image img {
+  transform: scale(1.05);
+}
+
+/* Video variant of project card image */
+.project-card__image--video {
+  background: #000;
+}
+
+.project-card__image--video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+
+.project-card:hover .project-card__image--video video {
   transform: scale(1.05);
 }
 
