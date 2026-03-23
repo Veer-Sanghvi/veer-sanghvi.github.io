@@ -95,7 +95,8 @@
   }
 
   /* -----------------------------------------------------------------------
-     4. Skill bar animation via IntersectionObserver
+     4. Skill bar animation — retained for progressive enhancement if bars
+        are ever re-added; skips gracefully when no .skill-bar__fill exist.
   ----------------------------------------------------------------------- */
   const skillFills = document.querySelectorAll('.skill-bar__fill');
 
