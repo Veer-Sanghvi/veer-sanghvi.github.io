@@ -191,13 +191,7 @@
             'workflow, reducing response time and improving process safety.',
       resultLabel: 'Result',
       result: 'Patent successfully filed (NDA).',
-      media: [
-        {
-          type: 'image',
-          src: 'assets/Image.png',
-          caption: 'Fire suppression and leak detection casting system — SolidWorks model and assembly design'
-        }
-      ]
+      media: []  /* Images under NDA -- not available for display */
     },
     'xflex': {
       title: 'X-FLEX Terrain-Capable Compact Lift',
@@ -210,14 +204,14 @@
       result: 'Autonomous load-following demonstrated.',
       media: [
         {
-          type: 'video',
-          src: 'assets/Finished.mov',
-          caption: 'X-FLEX scissor lift with hand-tracking — autonomous load-following demonstrated'
+          type: 'image',
+          src: 'assets/Image.png',
+          caption: 'X-FLEX scissor lift — 3D model'
         },
         {
-          type: 'video',
-          src: 'assets/Untitled.mov',
-          caption: 'X-FLEX terrain-capable compact lift — additional project footage'
+          type: 'image',
+          src: 'assets/Design .png',
+          caption: 'X-FLEX scissor lift — design drawing'
         }
       ]
     },
@@ -231,14 +225,24 @@
       result: '2,340 RPM achieved.',
       media: [
         {
+          type: 'video',
+          src: 'assets/Finished.mov',
+          caption: 'High-Speed Wobbler Engine — finished running at 2,340 RPM'
+        },
+        {
+          type: 'video',
+          src: 'assets/Untitled.mov',
+          caption: 'Wobbler engine — additional build and test footage'
+        },
+        {
           type: 'image',
           src: 'assets/IMG_5658.JPG',
-          caption: 'Wobbler engine running at 2,340 RPM — final operational test'
+          caption: 'Wobbler engine — machined components and assembly'
         },
         {
           type: 'image',
           src: 'assets/IMG_5660.JPG',
-          caption: 'Wobbler engine assembly — machined components and precision tolerances'
+          caption: 'Wobbler engine — precision-toleranced parts'
         },
         {
           type: 'image',
@@ -256,13 +260,7 @@
             'prototype components.',
       resultLabel: 'Milestone',
       result: 'Chassis design finalized; prototype components validated.',
-      media: [
-        {
-          type: 'image',
-          src: 'assets/Design%20.png',
-          caption: 'ASME IAM3D R.O.V.E.R — full chassis CAD model in SolidWorks, iterated with 3D-printed prototypes'
-        }
-      ]
+      media: []  /* No preview media -- images not yet available for this project */
     }
   };
 
@@ -348,40 +346,52 @@
     pmodalDesc.textContent  = data.desc;
     pmodalResult.innerHTML  = '<span class="result-label">' + data.resultLabel + ':</span> ' + data.result;
 
-    /* Thumbnails */
-    pmodalThumbs.innerHTML = '';
-    currentMedia.forEach(function (item, i) {
-      var thumb = document.createElement('div');
-      thumb.className = 'pmodal__thumb' + (item.type === 'video' ? ' pmodal__thumb--video' : '');
-      thumb.setAttribute('aria-label', 'Media ' + (i + 1));
-      thumb.setAttribute('role', 'button');
-      thumb.setAttribute('tabindex', '0');
+    /* Show or hide the gallery column depending on whether media exists */
+    var galleryEl = pmodalMedia.closest('.pmodal__gallery');
+    if (currentMedia.length === 0) {
+      if (galleryEl) { galleryEl.hidden = true; }
+      pmodalNav.hidden = true;
+      pmodalMedia.innerHTML = '';
+      pmodalThumbs.innerHTML = '';
+      pmodalCaption.textContent = '';
+    } else {
+      if (galleryEl) { galleryEl.hidden = false; }
 
-      if (item.type === 'video') {
-        var tv = document.createElement('video');
-        tv.src = item.src;
-        tv.muted = true;
-        tv.playsInline = true;
-        thumb.appendChild(tv);
-      } else {
-        var ti = document.createElement('img');
-        ti.src = item.src;
-        ti.alt = '';
-        thumb.appendChild(ti);
-      }
+      /* Thumbnails */
+      pmodalThumbs.innerHTML = '';
+      currentMedia.forEach(function (item, i) {
+        var thumb = document.createElement('div');
+        thumb.className = 'pmodal__thumb' + (item.type === 'video' ? ' pmodal__thumb--video' : '');
+        thumb.setAttribute('aria-label', 'Media ' + (i + 1));
+        thumb.setAttribute('role', 'button');
+        thumb.setAttribute('tabindex', '0');
 
-      thumb.addEventListener('click', function () { renderMedia(i); });
-      thumb.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); renderMedia(i); }
+        if (item.type === 'video') {
+          var tv = document.createElement('video');
+          tv.src = item.src;
+          tv.muted = true;
+          tv.playsInline = true;
+          thumb.appendChild(tv);
+        } else {
+          var ti = document.createElement('img');
+          ti.src = item.src;
+          ti.alt = '';
+          thumb.appendChild(ti);
+        }
+
+        thumb.addEventListener('click', function () { renderMedia(i); });
+        thumb.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); renderMedia(i); }
+        });
+        pmodalThumbs.appendChild(thumb);
       });
-      pmodalThumbs.appendChild(thumb);
-    });
 
-    /* Show / hide nav arrows */
-    pmodalNav.hidden = (currentMedia.length <= 1);
+      /* Show / hide nav arrows */
+      pmodalNav.hidden = (currentMedia.length <= 1);
 
-    /* Render first item */
-    renderMedia(0);
+      /* Render first item */
+      renderMedia(0);
+    }
 
     /* Show modal */
     pmodal.removeAttribute('hidden');
