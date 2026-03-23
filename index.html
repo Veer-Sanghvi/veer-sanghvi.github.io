@@ -221,12 +221,11 @@
         <div class="projects__grid">
 
           <!-- PROJECT CARD 1 -->
-          <article class="project-card">
+          <article class="project-card" data-project-id="fire-suppression" role="button" tabindex="0" aria-haspopup="dialog">
             <div class="project-card__image" aria-hidden="true">
               <img
-                src="assets/images/project-fire-suppression.jpg"
+                src="assets/Image.png"
                 alt="Novel Fire Suppression and Leak Detection In Casting System"
-                onerror="this.parentElement.classList.add('project-card__image--placeholder')"
               />
             </div>
             <div class="project-card__body">
@@ -245,11 +244,12 @@
               <p class="project-card__result">
                 <span class="result-label">Result:</span> Patent successfully filed (NDA).
               </p>
+              <span class="project-card__view-btn" aria-hidden="true">View Details &#8594;</span>
             </div>
           </article>
 
           <!-- PROJECT CARD 2 -->
-          <article class="project-card">
+          <article class="project-card" data-project-id="xflex" role="button" tabindex="0" aria-haspopup="dialog">
             <div class="project-card__image project-card__image--video" aria-hidden="true">
               <video
                 src="assets/Finished.mov"
@@ -257,7 +257,6 @@
                 muted
                 loop
                 playsinline
-                controls
                 aria-label="X-FLEX scissor lift with hand-tracking in action"
               ></video>
             </div>
@@ -277,11 +276,12 @@
               <p class="project-card__result">
                 <span class="result-label">Result:</span> Autonomous load-following demonstrated.
               </p>
+              <span class="project-card__view-btn" aria-hidden="true">View Details &#8594;</span>
             </div>
           </article>
 
           <!-- PROJECT CARD 3 -->
-          <article class="project-card">
+          <article class="project-card" data-project-id="wobbler" role="button" tabindex="0" aria-haspopup="dialog">
             <div class="project-card__image" aria-hidden="true">
               <img
                 src="assets/IMG_5658.JPG"
@@ -303,16 +303,16 @@
               <p class="project-card__result">
                 <span class="result-label">Result:</span> 2,340 RPM achieved.
               </p>
+              <span class="project-card__view-btn" aria-hidden="true">View Details &#8594;</span>
             </div>
           </article>
 
           <!-- PROJECT CARD 4 -->
-          <article class="project-card">
+          <article class="project-card" data-project-id="rover" role="button" tabindex="0" aria-haspopup="dialog">
             <div class="project-card__image" aria-hidden="true">
               <img
-                src="assets/Design.png"
+                src="assets/Design%20.png"
                 alt="ASME IAM3D R.O.V.E.R Competition vehicle design"
-                onerror="this.parentElement.classList.add('project-card__image--placeholder')"
               />
             </div>
             <div class="project-card__body">
@@ -331,6 +331,7 @@
               <p class="project-card__result">
                 <span class="result-label">Milestone:</span> Chassis design finalized; prototype components validated.
               </p>
+              <span class="project-card__view-btn" aria-hidden="true">View Details &#8594;</span>
             </div>
           </article>
 
@@ -545,6 +546,46 @@
       <p>&copy; <span id="year"></span> Veer Sanghvi. Built with HTML, CSS &amp; vanilla JS.</p>
     </div>
   </footer>
+
+  <!-- ============================================================
+       PROJECT MODAL
+  ============================================================ -->
+  <div class="pmodal" id="pmodal" role="dialog" aria-modal="true" aria-labelledby="pmodalTitle" hidden>
+    <div class="pmodal__backdrop" id="pmodalBackdrop"></div>
+    <div class="pmodal__dialog">
+
+      <button class="pmodal__close" id="pmodalClose" aria-label="Close project details">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <div class="pmodal__body">
+
+        <!-- Gallery column -->
+        <div class="pmodal__gallery">
+          <div class="pmodal__media-wrap" id="pmodalMedia"></div>
+          <div class="pmodal__gallery-nav" id="pmodalNav" hidden>
+            <button class="pmodal__nav-btn" id="pmodalPrev" aria-label="Previous media">&#8592;</button>
+            <span class="pmodal__counter" id="pmodalCounter"></span>
+            <button class="pmodal__nav-btn" id="pmodalNext" aria-label="Next media">&#8594;</button>
+          </div>
+          <p class="pmodal__caption" id="pmodalCaption"></p>
+          <div class="pmodal__thumbs" id="pmodalThumbs"></div>
+        </div>
+
+        <!-- Info column -->
+        <div class="pmodal__content">
+          <div class="pmodal__tags" id="pmodalTags"></div>
+          <h2 class="pmodal__title" id="pmodalTitle"></h2>
+          <p class="pmodal__desc" id="pmodalDesc"></p>
+          <p class="pmodal__result" id="pmodalResult"></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
   <script src="assets/js/main.js"></script>
 </body>

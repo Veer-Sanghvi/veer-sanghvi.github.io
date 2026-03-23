@@ -176,4 +176,281 @@
     });
   });
 
+  /* -----------------------------------------------------------------------
+     7. Project modal — data, open/close, gallery navigation
+  ----------------------------------------------------------------------- */
+
+  /* Project data: maps data-project-id → title, tags, desc, result, media */
+  var PROJECT_DATA = {
+    'fire-suppression': {
+      title: 'Novel Fire Suppression & Leak Detection In Casting System',
+      tags: ['Patent Filed', 'Manufacturing', 'SolidWorks'],
+      desc: 'Designed and optimized a novel advanced alloy casting system integrating leak ' +
+            'defect detection and fire suppression using SolidWorks for 3D modeling and detailed ' +
+            'drawing creation. The system integrates safety mechanisms directly into the casting ' +
+            'workflow, reducing response time and improving process safety.',
+      resultLabel: 'Result',
+      result: 'Patent successfully filed (NDA).',
+      media: [
+        {
+          type: 'image',
+          src: 'assets/Image.png',
+          caption: 'Fire suppression and leak detection casting system — SolidWorks model and assembly design'
+        }
+      ]
+    },
+    'xflex': {
+      title: 'X-FLEX Terrain-Capable Compact Lift',
+      tags: ['Robotics', 'Computer Vision', 'Python'],
+      desc: 'Engineering a miniature scissor lift with hand-tracking capability using MediaPipe, ' +
+            'designed to autonomously follow a designated point on the user\'s hand and assist in ' +
+            'lifting and transporting heavy loads, demonstrating closed-loop control without ' +
+            'additional sensors.',
+      resultLabel: 'Result',
+      result: 'Autonomous load-following demonstrated.',
+      media: [
+        {
+          type: 'video',
+          src: 'assets/Finished.mov',
+          caption: 'X-FLEX scissor lift with hand-tracking — autonomous load-following demonstrated'
+        },
+        {
+          type: 'video',
+          src: 'assets/Untitled.mov',
+          caption: 'X-FLEX terrain-capable compact lift — additional project footage'
+        }
+      ]
+    },
+    'wobbler': {
+      title: 'High-Speed Wobbler Engine',
+      tags: ['Machining', 'Sand Casting', 'CAD'],
+      desc: 'Modeled and assembled a high-speed wobbler mechanism via manufacturing, sand casting, ' +
+            'and tumbling. Produced detailed engineering drawings and performed tolerance analysis ' +
+            'to achieve stable operation at high RPM.',
+      resultLabel: 'Result',
+      result: '2,340 RPM achieved.',
+      media: [
+        {
+          type: 'image',
+          src: 'assets/IMG_5658.JPG',
+          caption: 'Wobbler engine running at 2,340 RPM — final operational test'
+        },
+        {
+          type: 'image',
+          src: 'assets/IMG_5660.JPG',
+          caption: 'Wobbler engine assembly — machined components and precision tolerances'
+        },
+        {
+          type: 'image',
+          src: 'assets/IMG_5662.jpg',
+          caption: 'Wobbler engine — sand cast and tumbled mechanism parts'
+        }
+      ]
+    },
+    'rover': {
+      title: 'ASME IAM3D R.O.V.E.R Competition',
+      tags: ['Competition', '3D Printing', 'ASME'],
+      desc: 'Designing and building a Ground Based Remote Controlled Vehicle capable of navigating ' +
+            'an obstacle field, meeting strict ASME weight and material constraints. Completed full ' +
+            'chassis CAD model in SolidWorks and iterated structural design using 3D-printed ' +
+            'prototype components.',
+      resultLabel: 'Milestone',
+      result: 'Chassis design finalized; prototype components validated.',
+      media: [
+        {
+          type: 'image',
+          src: 'assets/Design%20.png',
+          caption: 'ASME IAM3D R.O.V.E.R — full chassis CAD model in SolidWorks, iterated with 3D-printed prototypes'
+        }
+      ]
+    }
+  };
+
+  /* Modal elements */
+  var pmodal        = document.getElementById('pmodal');
+  var pmodalMedia   = document.getElementById('pmodalMedia');
+  var pmodalNav     = document.getElementById('pmodalNav');
+  var pmodalPrev    = document.getElementById('pmodalPrev');
+  var pmodalNext    = document.getElementById('pmodalNext');
+  var pmodalCounter = document.getElementById('pmodalCounter');
+  var pmodalCaption = document.getElementById('pmodalCaption');
+  var pmodalThumbs  = document.getElementById('pmodalThumbs');
+  var pmodalTags    = document.getElementById('pmodalTags');
+  var pmodalTitle   = document.getElementById('pmodalTitle');
+  var pmodalDesc    = document.getElementById('pmodalDesc');
+  var pmodalResult  = document.getElementById('pmodalResult');
+  var pmodalClose   = document.getElementById('pmodalClose');
+  var pmodalBackdrop = document.getElementById('pmodalBackdrop');
+
+  var currentMedia  = [];
+  var currentIndex  = 0;
+
+  /* Render one media item into the main display area */
+  function renderMedia(index) {
+    var item = currentMedia[index];
+    if (!item) return;
+
+    /* Stop any previous video */
+    var oldVideo = pmodalMedia.querySelector('video');
+    if (oldVideo) { oldVideo.pause(); }
+
+    pmodalMedia.innerHTML = '';
+
+    if (item.type === 'video') {
+      var vid = document.createElement('video');
+      vid.src = item.src;
+      vid.controls = true;
+      vid.muted = false;
+      vid.playsInline = true;
+      vid.setAttribute('aria-label', item.caption);
+      vid.style.width = '100%';
+      vid.style.height = '100%';
+      pmodalMedia.appendChild(vid);
+    } else {
+      var img = document.createElement('img');
+      img.src = item.src;
+      img.alt = item.caption;
+      pmodalMedia.appendChild(img);
+    }
+
+    pmodalCaption.textContent = item.caption;
+
+    /* Update counter */
+    pmodalCounter.textContent = (index + 1) + ' / ' + currentMedia.length;
+
+    /* Update active thumb */
+    pmodalThumbs.querySelectorAll('.pmodal__thumb').forEach(function (th, i) {
+      th.classList.toggle('pmodal__thumb--active', i === index);
+    });
+
+    currentIndex = index;
+  }
+
+  /* Build and open the modal for a given project id */
+  function openModal(projectId) {
+    var data = PROJECT_DATA[projectId];
+    if (!data) return;
+
+    currentMedia = data.media;
+    currentIndex = 0;
+
+    /* Tags */
+    pmodalTags.innerHTML = '';
+    data.tags.forEach(function (tag) {
+      var span = document.createElement('span');
+      span.className = 'tag';
+      span.textContent = tag;
+      pmodalTags.appendChild(span);
+    });
+
+    /* Title, desc, result */
+    pmodalTitle.textContent = data.title;
+    pmodalDesc.textContent  = data.desc;
+    pmodalResult.innerHTML  = '<span class="result-label">' + data.resultLabel + ':</span> ' + data.result;
+
+    /* Thumbnails */
+    pmodalThumbs.innerHTML = '';
+    currentMedia.forEach(function (item, i) {
+      var thumb = document.createElement('div');
+      thumb.className = 'pmodal__thumb' + (item.type === 'video' ? ' pmodal__thumb--video' : '');
+      thumb.setAttribute('aria-label', 'Media ' + (i + 1));
+      thumb.setAttribute('role', 'button');
+      thumb.setAttribute('tabindex', '0');
+
+      if (item.type === 'video') {
+        var tv = document.createElement('video');
+        tv.src = item.src;
+        tv.muted = true;
+        tv.playsInline = true;
+        thumb.appendChild(tv);
+      } else {
+        var ti = document.createElement('img');
+        ti.src = item.src;
+        ti.alt = '';
+        thumb.appendChild(ti);
+      }
+
+      thumb.addEventListener('click', function () { renderMedia(i); });
+      thumb.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); renderMedia(i); }
+      });
+      pmodalThumbs.appendChild(thumb);
+    });
+
+    /* Show / hide nav arrows */
+    pmodalNav.hidden = (currentMedia.length <= 1);
+
+    /* Render first item */
+    renderMedia(0);
+
+    /* Show modal */
+    pmodal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+
+    /* Focus close button */
+    pmodalClose.focus();
+  }
+
+  function closeModal() {
+    /* Stop any playing video */
+    var vid = pmodalMedia.querySelector('video');
+    if (vid) { vid.pause(); }
+
+    pmodal.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+
+    /* Return focus to the card that opened the modal */
+    if (lastFocusedCard) { lastFocusedCard.focus(); }
+  }
+
+  /* Nav buttons */
+  pmodalPrev.addEventListener('click', function () {
+    var i = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
+    renderMedia(i);
+  });
+  pmodalNext.addEventListener('click', function () {
+    var i = (currentIndex + 1) % currentMedia.length;
+    renderMedia(i);
+  });
+
+  /* Close via button or backdrop */
+  pmodalClose.addEventListener('click', closeModal);
+  pmodalBackdrop.addEventListener('click', closeModal);
+
+  /* Keyboard: Escape = close, arrow keys = navigate */
+  document.addEventListener('keydown', function (e) {
+    if (pmodal.hasAttribute('hidden')) return;
+
+    if (e.key === 'Escape') {
+      closeModal();
+    } else if (e.key === 'ArrowLeft') {
+      var i = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
+      renderMedia(i);
+    } else if (e.key === 'ArrowRight') {
+      var i = (currentIndex + 1) % currentMedia.length;
+      renderMedia(i);
+    }
+  });
+
+  /* Wire up project cards */
+  var lastFocusedCard = null;
+
+  document.querySelectorAll('.project-card[data-project-id]').forEach(function (card) {
+    function handleOpen(e) {
+      /* Don't open if user clicked a link or button inside the card */
+      if (e.target.closest('a, button')) return;
+      lastFocusedCard = card;
+      openModal(card.dataset.projectId);
+    }
+
+    card.addEventListener('click', handleOpen);
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        lastFocusedCard = card;
+        openModal(card.dataset.projectId);
+      }
+    });
+  });
+
 }());
