@@ -642,6 +642,11 @@ button {
   display: none;
 }
 
+/* Blank preview — no image or video available (e.g. NDA projects) */
+.project-card__image--blank {
+  background: var(--clr-surface-2);
+}
+
 .project-card__body {
   padding: var(--space-lg);
   display: flex;
@@ -1092,6 +1097,16 @@ button {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
+}
+
+/* When gallery is hidden, expand info column to full width */
+.pmodal__body > .pmodal__gallery[hidden] {
+  display: none;
+}
+
+.pmodal__body > .pmodal__gallery[hidden] ~ .pmodal__content {
+  grid-column: 1 / -1;
+  border-left: none;
 }
 
 /* Gallery column */
