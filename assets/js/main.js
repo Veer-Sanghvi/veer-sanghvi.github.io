@@ -197,7 +197,8 @@
       title: 'X-FLEX Terrain-Capable Compact Lift',
       tags: ['Robotics', 'Computer Vision', 'Python'],
       desc: 'Engineering a miniature scissor lift with forklift\'s forks and mast controlled by ' +
-            'PLC programmed controller and assist in lifting and transporting heavy loads.',
+            'PLC programmed controller and assist in lifting and transporting heavy loads, ' +
+            'demonstrating closed-loop control without additional sensors.',
       resultLabel: 'Result',
       result: 'Autonomous load-following demonstrated.',
       media: [
