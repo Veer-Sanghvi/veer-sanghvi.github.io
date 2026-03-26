@@ -196,10 +196,8 @@
     'xflex': {
       title: 'X-FLEX Terrain-Capable Compact Lift',
       tags: ['Robotics', 'Computer Vision', 'Python'],
-      desc: 'Engineering a miniature scissor lift with hand-tracking capability using MediaPipe, ' +
-            'designed to autonomously follow a designated point on the user\'s hand and assist in ' +
-            'lifting and transporting heavy loads, demonstrating closed-loop control without ' +
-            'additional sensors.',
+      desc: 'Engineering a miniature scissor lift with forklift\'s forks and mast controlled by ' +
+            'PLC programmed controller and assist in lifting and transporting heavy loads.',
       resultLabel: 'Result',
       result: 'Autonomous load-following demonstrated.',
       media: [
